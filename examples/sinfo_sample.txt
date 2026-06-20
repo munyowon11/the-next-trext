@@ -1,0 +1,5 @@
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+gpu          up   infinite      2  alloc gpu-[001-002]
+gpu          up   infinite      1   idle gpu-003
+gpu          up   infinite      1  drain gpu-004
+cpu          up   infinite      3   idle cpu-[001-003]

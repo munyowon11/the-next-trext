@@ -1,0 +1,7 @@
+# Local Netlify folder
+.netlify
+
+# Internal prompts / strategy drafts
+prompts/
+
+.claude/

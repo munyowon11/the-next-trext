@@ -1,0 +1,4 @@
+REASON USER TIMESTAMP NODELIST
+LowMemory sample_user 2026-06-10T08:20:00 gpu-004
+NodeNotResponding sample_user 2026-06-10T08:45:00 cpu-007
+Maintenance sample_user 2026-06-10T09:10:00 gpu-002
