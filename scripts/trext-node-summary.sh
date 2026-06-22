@@ -5,17 +5,24 @@ set -eu
 # It intentionally contains no Slurm, SSH, network, or cluster-control calls.
 
 ROOT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
-SAMPLE_FILE="${1:-${ROOT_DIR}/examples/sinfo_sample.txt}"
-OUTPUT_FILE="${2:-${ROOT_DIR}/dist/evidence_packet.md}"
+SAMPLE_FILE="${ROOT_DIR}/examples/sinfo_sample.txt"
+OUTPUT_FILE="${ROOT_DIR}/dist/evidence_packet.md"
+if [ "$#" -ne 0 ]; then
+  echo "Error: Stage 1 sample-mode does not accept custom input or output paths." >&2
+  echo "Use the fixed synthetic fixture: examples/sinfo_sample.txt" >&2
+  echo "Approved/anonymized real exports belong to a future private validation stage, not this public sample script." >&2
+  exit 2
+fi
+
 
 usage() {
   cat <<'EOF'
 Usage:
-  bash scripts/trext-node-summary.sh [sample-file] [output-file]
+  bash scripts/trext-node-summary.sh
 
 Defaults:
-  sample-file: examples/sinfo_sample.txt
-  output-file: dist/evidence_packet.md
+  sample-file: examples/sinfo_sample.txt (fixed Stage 1 synthetic fixture; custom input is future private validation only)
+  output-file: dist/evidence_packet.md (fixed Stage 1 sample output)
 
 This is a sample-only, read-only replay. Human review is required.
 EOF
@@ -101,7 +108,7 @@ END {
   partition_count = 0
   for (partition in partitions) partition_count++
 
-  print "> **SAMPLE OUTPUT — NOT REAL CLUSTER DATA**"
+    print "> **SAMPLE OUTPUT - NOT REAL CLUSTER DATA**"
   print "> This file is generated from a local synthetic fixture (`examples/sinfo_sample.txt`)."
   print "> It does not represent a real cluster, real nodes, or real operational state."
   print "> No live Slurm integration. No action taken. Human review required before any operation."
