@@ -8,7 +8,7 @@ TEMP_DIR="$(mktemp -d)"
 ACTUAL_FILE="${TEMP_DIR}/evidence_packet.md"
 ALTERNATE_FILE="${TEMP_DIR}/evidence_packet_alternate.md"
 STDOUT_FILE="${TEMP_DIR}/stdout.md"
-trap 'rm -rf "${TEMP_DIR}"' EXIT HUP INT TERM
+trap 'rm -rf "${TEMP_DIR}"; rm -f "${ROOT_DIR}/dist/evidence_packet.md"; rmdir "${ROOT_DIR}/dist" 2>/dev/null || true' EXIT HUP INT TERM
 
 bash "${ROOT_DIR}/scripts/trext-node-summary.sh" > "${STDOUT_FILE}"
 cp "${ROOT_DIR}/dist/evidence_packet.md" "${ACTUAL_FILE}"
