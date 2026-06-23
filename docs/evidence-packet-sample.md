@@ -1,4 +1,4 @@
-> **SAMPLE OUTPUT — NOT REAL CLUSTER DATA**
+> **SAMPLE OUTPUT - NOT REAL CLUSTER DATA**
 > This file is generated from a local synthetic fixture (`examples/sinfo_sample.txt`).
 > It does not represent a real cluster, real nodes, or real operational state.
 > No live Slurm integration. No action taken. Human review required before any operation.
@@ -58,4 +58,4 @@ This input does not include:
 
 ## 6. Next action recommendation
 
-Create a sanitized local fixture containing the reason and timestamp for the flagged node state, then regenerate this packet for operator review. Do not take cluster action based on this sample packet.
+For Stage 1 public sample-mode, record missing reason/timestamp evidence as operator review questions only. Approved/anonymized real exports belong to a future private validation stage. Do not take cluster action based on this sample packet.

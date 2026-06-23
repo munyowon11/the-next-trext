@@ -5,28 +5,62 @@ set -eu
 # It intentionally contains no Slurm, SSH, network, or cluster-control calls.
 
 ROOT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
-SAMPLE_FILE="${1:-${ROOT_DIR}/examples/sinfo_sample.txt}"
-OUTPUT_FILE="${2:-${ROOT_DIR}/dist/evidence_packet.md}"
+
+SAMPLE_FILE="${ROOT_DIR}/examples/sinfo_sample.txt"
+
+OUTPUT_FILE="${ROOT_DIR}/dist/evidence_packet.md"
+
+
 
 usage() {
+
   cat <<'EOF'
+
 Usage:
-  bash scripts/trext-node-summary.sh [sample-file] [output-file]
+
+  bash scripts/trext-node-summary.sh
+
+
 
 Defaults:
-  sample-file: examples/sinfo_sample.txt
-  output-file: dist/evidence_packet.md
+
+  sample-file: examples/sinfo_sample.txt (fixed Stage 1 synthetic fixture; custom input is future private validation only)
+
+  output-file: dist/evidence_packet.md (fixed Stage 1 sample output)
+
+
 
 This is a sample-only, read-only replay. Human review is required.
+
 EOF
+
 }
 
-case "${SAMPLE_FILE}" in
-  -h|--help)
-    usage
-    exit 0
-    ;;
-esac
+
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+
+  usage
+
+  exit 0
+
+fi
+
+
+
+if [ "$#" -ne 0 ]; then
+
+  echo "Error: Stage 1 sample-mode does not accept custom input or output paths." >&2
+
+  echo "Use the fixed synthetic fixture: examples/sinfo_sample.txt" >&2
+
+  echo "Approved/anonymized real exports belong to a future private validation stage, not this public sample script." >&2
+
+  exit 2
+
+fi
+
+
 
 if [ ! -f "${SAMPLE_FILE}" ]; then
   echo "Error: sample file not found: ${SAMPLE_FILE}" >&2
@@ -101,7 +135,7 @@ END {
   partition_count = 0
   for (partition in partitions) partition_count++
 
-  print "> **SAMPLE OUTPUT — NOT REAL CLUSTER DATA**"
+    print "> **SAMPLE OUTPUT - NOT REAL CLUSTER DATA**"
   print "> This file is generated from a local synthetic fixture (`examples/sinfo_sample.txt`)."
   print "> It does not represent a real cluster, real nodes, or real operational state."
   print "> No live Slurm integration. No action taken. Human review required before any operation."
@@ -178,9 +212,9 @@ END {
   print "## 6. Next action recommendation"
   print ""
   if (drain > 0 || down > 0) {
-    print "Create a sanitized local fixture containing the reason and timestamp for the flagged node state, then regenerate this packet for operator review. Do not take cluster action based on this sample packet."
+    print "For Stage 1 public sample-mode, record missing reason/timestamp evidence as operator review questions only. Approved/anonymized real exports belong to a future private validation stage. Do not take cluster action based on this sample packet."
   } else {
-    print "Add a second sanitized snapshot with a capture time, then compare the local fixtures to determine whether any state persists. Do not take cluster action based on this sample packet."
+    print "For Stage 1 public sample-mode, keep this as a fixed synthetic fixture replay and document additional evidence needs separately. Do not take cluster action based on this sample packet."
   }
 }
 ' "${SAMPLE_FILE}" > "${TEMP_FILE}"

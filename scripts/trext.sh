@@ -39,7 +39,7 @@ hash_file() {
 
 cmd_replay() {
   ensure_out_dir
-  bash "${ROOT_DIR}/scripts/trext-node-summary.sh" "${ROOT_DIR}/examples/sinfo_sample.txt" > "${OUT_DIR}/node-status-summary.txt"
+  bash "${ROOT_DIR}/scripts/trext-node-summary.sh" > "${OUT_DIR}/node-status-summary.txt"
   cat "${OUT_DIR}/node-status-summary.txt"
   echo ""
   echo "Saved: reports/generated/node-status-summary.txt"
